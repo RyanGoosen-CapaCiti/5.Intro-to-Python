@@ -8,6 +8,7 @@
 
 
 import os, re
+import art
 
 directory = os.path.dirname(os.path.realpath(__file__))
 print(directory)
@@ -31,13 +32,14 @@ def replace_text(file_location, replacing, replacer):#REPLACES TEXT IN A FILE
 def errorhandling(value):
     try:
         value = int(value)
-        print('Integer')
+        return True
     except:
         try:
             value = float(value)
-            print('float')
+            return True
         except:
-            print('String')
+            print('You did not enter a valid number!!!')
+            return False
 
 def deposits(value, file_location):
     f = open(file_location,'r+')
@@ -48,6 +50,16 @@ def deposits(value, file_location):
     f.write(str(current_balance))
     f.close()
 
+def withdrawls(value, file_location):
+    f = open(file_location,'r+')
+    current_balance = f.read()
+    current_balance = float(current_balance)
+    current_balance -= float(value)
+    f = open(file_location, 'w')
+    f.write(str(current_balance))
+    f.close()
+
+print(art.a)
 
 try:
     # Tries to access file
@@ -60,7 +72,9 @@ except:
     f.close()
 
 amount = input('Enter the amount you would like to deposit: ')
+readfile(file_location)
 errorhandling(amount)
-deposits(amount, file_location)
+withdrawls(amount, file_location)
+readfile(file_location)
 f.close()
 
