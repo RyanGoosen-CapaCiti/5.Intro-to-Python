@@ -74,7 +74,7 @@ except:
 amount = input('Enter the amount you would like to deposit: ')
 readfile(file_location)
 errorhandling(amount)
-withdrawls(amount, file_location)
+deposits(amount, file_location)
 readfile(file_location)
 f.close()
 
