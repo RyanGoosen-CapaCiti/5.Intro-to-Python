@@ -23,20 +23,24 @@
             #  ●     ‘n’ is the number of months over which the bond will be repaid.
 
 def investment():
-    r = input('Interest')
-    p = input('Amount')
-    t = input('Years')
-    f = input('Compound or Simple')
+    r = float(input(r'Interest as a % e.g 35: '))
+    p = float(input('Amount: '))
+    t = int(input('Years: '))
+    f = input('Compound or Simple: ')
     if f == compound:
-        A = p(1 + r) ^ t
+        A = p(1 + r) ** t
     else:
         A = p(1 + r * t)
+    
+    print(f'Your money {A}')
 
 def bond():
-    p = input('Value')
-    i = input('Intereset')
-    n = input('Month')
-    x = (i.p)/(1 - (1+i)^(-n))
+    p = float(input('Value: '))
+    i = float(input(r'Interest as a % e.g 35: '))
+    i = i / 100
+    n = int(input('Month: '))
+    x = (i*p)/(1 - (1+i)**(-n))
+    print(f'Your payments {x}')
 
 choice = input('Bond or investmewnt: ')
 if choice == 'bond':
