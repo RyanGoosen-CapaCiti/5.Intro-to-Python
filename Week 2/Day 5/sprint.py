@@ -27,7 +27,7 @@ def investment():
     p = float(input('Amount: '))
     t = int(input('Years: '))
     f = input('Compound or Simple: ')
-    if f == compound:
+    if f.upper() == 'COMPOUND':
         A = p(1 + r) ** t
     else:
         A = p(1 + r * t)
@@ -41,9 +41,11 @@ def bond():
     n = int(input('Month: '))
     x = (i*p)/(1 - (1+i)**(-n))
     print(f'Your payments {x}')
+    # x = (i*p)/(1 - (1+i)**(-n))
+    # x = (0.35*1000000) / (1-(1+0.35)**(-144))
 
-choice = input('Bond or investmewnt: ')
-if choice == 'bond':
+choice = input('What would you like to calculate: Bond or Investment ')
+if choice.upper() == 'BOND':
     bond()
-elif choice == 'investment':
+elif choice.upper() == 'INVESTMENT':
     investment()

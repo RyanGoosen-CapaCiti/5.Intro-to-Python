@@ -44,19 +44,23 @@ def errorhandling(value):
 def deposits(value, file_location):
     f = open(file_location,'r+')
     current_balance = f.read()
+    print(f'Your balance was R{current_balance}')
     current_balance = float(current_balance)
     current_balance += float(value)
     f = open(file_location, 'w')
     f.write(str(current_balance))
+    print(f'Your balance was R{current_balance}')
     f.close()
 
 def withdrawls(value, file_location):
     f = open(file_location,'r+')
     current_balance = f.read()
+    print(f'Your balance was R{current_balance}')
     current_balance = float(current_balance)
     current_balance -= float(value)
     f = open(file_location, 'w')
     f.write(str(current_balance))
+    print(f'Your balance changed to R{current_balance}')
     f.close()
 
 print(art.a)
@@ -70,11 +74,19 @@ except:
     # Check the different format you can open with, creating the document in write mode, need to write directly to the document after creation
     f.write('0')
     f.close()
-
-amount = input('Enter the amount you would like to deposit: ')
-readfile(file_location)
-errorhandling(amount)
-deposits(amount, file_location)
-readfile(file_location)
-f.close()
-
+options = input('What would you like to do? Type 1 for Withdrawls, 2 for Deposits and 3 for Transaction history: ')
+try:
+    if int(options) == 1:
+        amount = input('Enter the amount you would like to withdraw: R')
+        if errorhandling(amount):
+            withdrawls(amount, file_location)
+    elif int(options) == 2:
+        amount = input('Enter the amount you would like to deposit: R')
+        if errorhandling(amount):
+            deposits(amount, file_location)
+    elif int(options) == 3:
+        pass
+    else:
+        print('You did not pick a valid option.')
+except:
+     print('You did not enter a valid input.')
