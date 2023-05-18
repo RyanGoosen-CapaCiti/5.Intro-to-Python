@@ -14,9 +14,39 @@
 # >>> 
 # >>> ============ RESTART ======================
 # >>> 
-name = input('Enter a file name: ') 
-f = open(name, 'a')
-print()
-    # Check the different format you can open with, creating the document in write mode, need to write directly to the document after creation
-f.write('0')
-f.close()
+import re
+import subprocess
+
+def get_default_program(extension):
+    try:
+        # Execute the command to query the default program for the extension
+        command = ['xdg-mime', 'query', 'default', extension]
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, _ = process.communicate()
+
+        # Decode the output and remove any trailing newline characters
+        default_program = output.decode('utf-8').strip()
+        
+        return default_program
+    except Exception as e:
+        print("An error occurred:", str(e))
+
+# Usage example
+
+filename = input('Enter a file name: ') 
+pattern = r'\.(\w+)$'
+
+match = re.search(pattern, filename)
+
+if match:
+    extension_new = match.group(1)
+    extension = extension_new
+    default_program = get_default_program(extension)
+    if default_program:
+        print(f"The default program for opening .{extension} files is: {default_program}")
+    else:
+        print(f"No default program found for opening .{extension} files.")
+
+else:
+    print("No file extension found.")
+

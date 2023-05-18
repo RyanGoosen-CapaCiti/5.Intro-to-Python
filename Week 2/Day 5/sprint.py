@@ -24,15 +24,16 @@
 
 def investment():
     r = float(input(r'Interest as a % e.g 35: '))
+    r /= 100
     p = float(input('Amount: '))
     t = int(input('Years: '))
     f = input('Compound or Simple: ')
     if f.upper() == 'COMPOUND':
-        A = p(1 + r) ** t
+        A = p * (1 + r) ** t
     else:
-        A = p(1 + r * t)
+        A = p * (1 + r * t)
     
-    print(f'Your money {A}')
+    print(f'Your money {round(A)}')
 
 def bond():
     p = float(input('Value: '))
@@ -40,7 +41,7 @@ def bond():
     i = i / 100
     n = int(input('Month: '))
     x = (i*p)/(1 - (1+i)**(-n))
-    print(f'Your payments {x}')
+    print(f'Your payments {x/n}')
     # x = (i*p)/(1 - (1+i)**(-n))
     # x = (0.35*1000000) / (1-(1+0.35)**(-144))
 
