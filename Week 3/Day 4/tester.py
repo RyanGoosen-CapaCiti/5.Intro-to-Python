@@ -1,7 +1,9 @@
 from Activity_1 import Jackson
 
-print(Jackson().var1)
-print(Jackson().var2)
+jackson_instance = Jackson()
 
-Jackson().change_var('James')
-print(Jackson().var2)
+print(jackson_instance.var1)
+print(jackson_instance.var2)
+
+jackson_instance.change_var('James')
+print(jackson_instance.var2)

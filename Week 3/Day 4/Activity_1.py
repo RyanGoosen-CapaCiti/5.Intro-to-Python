@@ -4,4 +4,4 @@ class Jackson:
         self.var2 = 'Sam'
 
     def change_var(self, name):
-        var2 = name
+        self.var2 = name
