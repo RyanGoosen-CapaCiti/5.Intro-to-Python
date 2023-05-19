@@ -51,13 +51,29 @@ def deposits(value, file_location):
     f.write(str(current_balance))
     print(f'Your balance was R{current_balance}')
     f.close()
-
+'''
+Ask the user how much they would like to withdraw
+Set a variable equal to that value
+Open the textfile containing the user details in read mode
+Set a variable equal to the value inside the textfile
+Display there current balance 
+Set the current balance equal to current balance minus the withdraw amount
+Display the withdraw amomunt
+Display the new balance
+Open the textfile in write mode
+Write the current balance to the textfile
+Close the textfile
+'''
 def withdrawls(value, file_location):
     f = open(file_location,'r+')
     current_balance = f.read()
     print(f'Your balance was R{current_balance}')
     current_balance = float(current_balance)
     current_balance -= float(value)
+    if current_balance < 0:
+        print('Dam son slow down, you broke!!!')
+    else:
+        print('Keep it going my boy.')
     f = open(file_location, 'w')
     f.write(str(current_balance))
     print(f'Your balance changed to R{current_balance}')
