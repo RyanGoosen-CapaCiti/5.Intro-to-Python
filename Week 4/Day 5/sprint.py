@@ -97,68 +97,59 @@ def balance_check(username, file_location_Accounts):
     print(balance)
 
 def pin_valid(pin):
+    pass
     # Length cant be more than 4 numbers
     # Needs to be numbers
     # Can't be a float or string
     # Check if the user is fine with the pin
-    try:
-        pin = int(pin)
-        if len(str(pin)) != 4:
-            print('The pin you have entered does not meet the allowed pin length (4).')
-            print('Please reenter you pin')
-            return False
-        else:
-            ok = input(f'Your pin is {pin}, are you sure you want to keep it. y/n')
-            if ok.lower() == 'y':
-                return True
-            else:
-                print('Please enter a different pin.')
-                return False
-    except:
-        print('The pin you have inputed is not a number')
-        return False
 
-def username_valid(username):
+
+def username_valid(username, file_location_BankLog):
     # Username cannot be longer than 12 characters
     # Username cant be shorted than 4 charackters
     # Username cant already exist
     # Username needs to be letters
     # Username is not case sentisitive so it can be lower, upper or a combination
-    try:
-        pass
+    f = open(file_location_BankLog, 'r')
+    document = f.read()
+    if username.isalpha():
+        if (len(username) >= 4) and (len(username) <= 12):
+            if username not in document:
+                pass
+            else:
+                print('This username already exits')
+        else:
+            print('The username you have entered needs to be a min of 4 and a max 12 characters.') 
+    else:
+        print('The username you have entered is not valid')
         # String check
         # Length check
         # Letter check
         # username conversion to lowercase
         # check if already exits
 
-    except:
-        print('You have not entered a valid username')
-        return False
+def testing(file_location_BankLog, username):
+    f = open(file_location_BankLog, 'r')
+    document = f.readlines()
+    available = True
+    for i in document:
+        if username == i.split(' ')[0].lower():
+            available = False
+            break
+    if available:
+        print('This username is avaialable.')
+    else:
+        print('This username already exists.')
 
-# Validations needed: Checks if the user entered a valid pin
-#                     Checks if the user entered a username that hasnt been entered before
-# 
-# 
-# 
-# 
-
+    # if username not in document:
+    #     print(f'{username} is valid')
+    # else:
+    #     print('This username already exits')
 
 directory = os.path.dirname(os.path.realpath(__file__))
 file_location_BankLog = os.path.join(directory,"Bank_Log.txt")
 file_location_Accounts = directory+'/Accounts/'
 file_location_Transactions = directory+'/Transaction History/'
-username = 'zapppa' 
+username = 'zainap' 
 pin = '6633'
-
-#FROM YOUR LITTLE SISTER
-#ADD A SET PIN NUMBER(LIMIT) I.E) PIN ONLY HAS 4 DIGITS// INVALID PIN//EXCEEDS PIN LIMIT?
-#NO NEGATIVE NUMBERS IN A BANK ACCOUNT UNLESS ITS A CREDIT CARD
-#THANK YOU FOR TRYING ZAINAP-PROOFING!! IN NEED OF A COURIER SERVICES? TRY ZAINAP-EXPRESS
-#AFTER YOU HAVE IMPLEMENTED THE ABOVE CHNAGES YOU ARE QUALIFIED TO SAY THAT IT IS ZAINAP-PROOFIED!
-
-# create_user_account(username, pin, file_location_BankLog, file_location_Accounts, file_location_Transactions)
-# login(username, pin, file_location_BankLog)
-# withdraw(username, file_location_Accounts, 100000000)
-# deposit(username, file_location_Accounts, 10000)
-# balance_check(username, file_location_Accounts)
+testing(file_location_BankLog, username)
